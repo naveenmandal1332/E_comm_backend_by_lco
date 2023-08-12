@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: T-shirt Store API
+  description: This is backend api for Ecomm
+  version: 0.1.9
+  contact:
+    email: nvnv1332@gmail.com
+
+servers:
+  - url: '{prtocol}://localhost:3000/api/{version}'
+    description: For local host
+    variable:
+      version:
+        enum:
+          - v1
+          - v2
+        default: v1
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerAuth:
+      type: http
+      schema: bearer
+
+paths:
+  /dummy:
+    get:
+      tags:
+        - Home
+      summary: return a dummy data
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'mystring'
+        400:
+          description: Bad request
+        500:
+          description: Internal Server error
